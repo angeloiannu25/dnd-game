@@ -34,7 +34,7 @@ def carica_partita():
         "chat": [],
         "giocatori": {
             "Giocatore 1": {
-                "nome": "Thorin",
+                "nome": "Arcadian",
                 "classe": "Guerriero",
                 "livello": 3,
                 "forza": 16,
@@ -48,8 +48,8 @@ def carica_partita():
                 "inventario": ["Spada lunga", "Scudo", "Pozione cura"]
             },
             "Giocatore 2": {
-                "nome": "Elara",
-                "classe": "Maga",
+                "nome": "Murluk",
+                "classe": "Mago",
                 "livello": 3,
                 "forza": 8,
                 "destrezza": 14,
@@ -239,11 +239,68 @@ if prompt := st.chat_input(f"Cosa fa {pg['nome']}?"):
                 if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
                     st.warning("⏰ Quota API esaurita. Riprova tra qualche minuto o domani!")
 
-# Backup
-with st.expander("💾 Backup"):
-    st.download_button(
-        "Scarica",
-        json.dumps(dati, indent=2),
-        "partita.json",
-        "application/json"
-    )
+# Backup e Reset
+with st.expander("⚙️ Opzioni"):
+    col_opt1, col_opt2 = st.columns(2)
+    
+    # Backup
+    with col_opt1:
+        st.write("**💾 Backup Partita**")
+        backup_data = json.dumps(dati, indent=2, ensure_ascii=False)
+        st.download_button(
+            "📥 Scarica Backup",
+            data=backup_data,
+            file_name=f"dnd_backup_{datetime.now().strftime('%Y%m%d_%H%M')}.json",
+            mime="application/json",
+            use_container_width=True
+        )
+    
+    # Reset
+    with col_opt2:
+        st.write("**🔄 Reset Partita**")
+        st.warning("⚠️ Cancella tutto!")
+        
+        if st.button("🗑️ RESET COMPLETO", use_container_width=True, type="secondary"):
+            # Cancella dal database
+            try:
+                supabase.table("partite").delete().eq("partita_id", PARTITA_ID).execute()
+            except:
+                pass
+            
+            # Reset locale
+            st.session_state.dati = {
+                "chat": [],
+                "giocatori": {
+                    "Giocatore 1": {
+                        "nome": "Thorin",
+                        "classe": "Guerriero",
+                        "livello": 3,
+                        "forza": 16,
+                        "destrezza": 12,
+                        "costituzione": 14,
+                        "intelligenza": 10,
+                        "saggezza": 11,
+                        "carisma": 9,
+                        "hp_max": 30,
+                        "hp": 30,
+                        "inventario": ["Spada lunga", "Scudo", "Pozione cura"]
+                    },
+                    "Giocatore 2": {
+                        "nome": "Elara",
+                        "classe": "Maga",
+                        "livello": 3,
+                        "forza": 8,
+                        "destrezza": 14,
+                        "costituzione": 10,
+                        "intelligenza": 16,
+                        "saggezza": 12,
+                        "carisma": 13,
+                        "hp_max": 20,
+                        "hp": 20,
+                        "inventario": ["Bacchetta", "Libro", "Pozione mana"]
+                    }
+                }
+            }
+            
+            st.success("✅ Partita resettata!")
+            st.rerun()
