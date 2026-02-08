@@ -1,0 +1,5 @@
+.env
+partita.json
+_pycache_/
+*.pyc
+.DS_Store
