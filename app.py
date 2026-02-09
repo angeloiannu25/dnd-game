@@ -96,11 +96,47 @@ def load_css():
         border-radius: 10px !important;
     }
     
-    /* Nascondi elementi tecnici */
+  /* ============ NASCONDI ELEMENTI TECNICI ============ */
+    
+    /* Nascondi SVG e icone */
     [data-testid="stExpander"] svg,
     button[title*="sidebar"] svg,
     svg[data-testid="stIconChevronDown"],
-    svg[data-testid="stIconChevronUp"] {
+    svg[data-testid="stIconChevronUp"],
+    svg[data-testid="stIconMaterial"] {
+        display: none !important;
+    }
+    
+    /* Nascondi testo "keyboard_double_arrow" */
+    button span[data-baseweb] {
+        font-size: 0 !important;
+    }
+    
+    /* Nascondi testo tecnico negli expander */
+    [data-testid="stExpander"] details summary span {
+        font-size: inherit !important;
+    }
+    
+    [data-testid="stExpander"] details summary::marker {
+        content: "🗡️ " !important;
+    }
+    
+    /* Nascondi "double_arrow_right" e simili */
+    button[kind="header"]::after {
+        content: "" !important;
+    }
+    
+    button[kind="header"] span {
+        visibility: hidden !important;
+    }
+    
+    /* Nascondi label del radio button */
+    [data-testid="stRadio"] > label {
+        display: none !important;
+    }
+    
+    /* Nascondi testo "smart_" nelle chat */
+    [data-testid="stChatMessage"] span[data-testid*="smart"] {
         display: none !important;
     }
     
@@ -113,6 +149,49 @@ def load_css():
     ::-webkit-scrollbar-thumb {
         background: linear-gradient(180deg, #5c4033 0%, #3d2817 100%);
         border-radius: 6px;
+    }
+    /* ============ FIX TESTI TECNICI SPECIFICI ============ */
+    
+    /* Nascondi "keyboard_double_arrow" nel pulsante sidebar */
+    button[kind="header"] {
+        font-size: 0 !important;
+        width: 40px !important;
+    }
+    
+    button[kind="header"] svg {
+        font-size: 24px !important;
+    }
+    
+    /* Nascondi "double_arrow_right" sopra la chat */
+    [data-testid="stHeader"] button span {
+        display: none !important;
+    }
+    
+    /* Nascondi "smart_toy" nelle icone chat */
+    [data-testid="stChatMessage"] svg + span {
+        display: none !important;
+    }
+    
+    /* Nascondi TUTTI i testi Material Icons */
+    span[class*="material"] {
+        font-size: 0 !important;
+    }
+    
+    span[class*="material"]::before,
+    span[class*="material"]::after {
+        font-size: 0 !important;
+    }
+    
+    /* Forza nascondere testo nei bottoni header */
+    [data-testid="collapsedControl"] span {
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    /* Mantieni solo l'icona SVG visibile */
+    [data-testid="collapsedControl"] svg {
+        visibility: visible !important;
     }
     </style>
     """
