@@ -18,7 +18,7 @@ def load_css():
     <style>
     @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
     
-    /* Sfondo taverna */
+    /* ============ SFONDO TAVERNA ============ */
     [data-testid="stAppViewContainer"] {
         background: linear-gradient(135deg, #2c1810 0%, #3d2817 25%, #4a3520 50%, #3d2817 75%, #2c1810 100%);
         background-size: 400% 400%;
@@ -31,20 +31,20 @@ def load_css():
         100% { background-position: 0% 50%; }
     }
     
-    /* Sidebar */
+    /* ============ SIDEBAR ============ */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #1a0f08 0%, #2d1b12 50%, #1a0f08 100%);
         border-right: 4px solid #5c4033;
+        box-shadow: inset -10px 0 30px rgba(0,0,0,0.5);
     }
     
-    /* Font titoli medievale */
+    /* ============ FONT ============ */
     h1, h2, h3 {
         font-family: 'MedievalSharp', cursive !important;
         color: #f4e4c1 !important;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     }
     
-    /* Testo normale */
     p, div, span, label {
         color: #e8d4b0 !important;
         font-family: 'Georgia', serif !important;
@@ -54,14 +54,16 @@ def load_css():
         color: #f4e4c1 !important;
     }
     
-    /* Pulsanti legno */
+    /* ============ PULSANTI ============ */
     button {
         background: linear-gradient(145deg, #5c4033 0%, #6d4c3d 50%, #5c4033 100%) !important;
         color: #f4e4c1 !important;
         border: 3px solid #3d2817 !important;
         border-radius: 8px !important;
         font-family: 'MedievalSharp', cursive !important;
+        font-size: 14px !important;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
     }
     
     button:hover {
@@ -69,78 +71,56 @@ def load_css():
         transform: translateY(-2px) !important;
     }
     
-    /* Input */
+    /* ============ INPUT ============ */
     input, textarea, select {
         background: rgba(30,20,15,0.8) !important;
         color: #f4e4c1 !important;
         border: 2px solid #5c4033 !important;
+        border-radius: 6px !important;
         font-family: 'Georgia', serif !important;
+        box-shadow: inset 0 2px 8px rgba(0,0,0,0.5) !important;
     }
     
-    /* Chat messaggi */
+    /* ============ CHAT ============ */
     [data-testid="stChatMessageContent"] {
         background: rgba(45,30,20,0.9) !important;
         border: 2px solid #5c4033 !important;
         border-radius: 10px !important;
+        padding: 15px !important;
     }
     
-    /* Metrics */
+    [data-testid="stChatMessage"][data-testid*="assistant"] {
+        border-left: 4px solid #d4a574 !important;
+    }
+    
+    /* ============ METRICS ============ */
     [data-testid="stMetricValue"] {
         color: #ffd700 !important;
         font-weight: bold !important;
+        text-shadow: 0 0 10px rgba(255,215,0,0.5) !important;
     }
     
-    /* Progress bar HP */
+    [data-testid="metric-container"] {
+        background: rgba(30,20,15,0.6) !important;
+        border: 2px solid #5c4033 !important;
+        border-radius: 8px !important;
+    }
+    
+    /* ============ PROGRESS BAR ============ */
     [data-testid="stProgress"] > div > div {
         background: linear-gradient(90deg, #8b0000 0%, #ff4444 50%, #8b0000 100%) !important;
         border-radius: 10px !important;
+        box-shadow: 0 0 15px rgba(255,0,0,0.5) !important;
     }
     
-  /* ============ NASCONDI ELEMENTI TECNICI ============ */
-    
-    /* Nascondi SVG e icone */
-    [data-testid="stExpander"] svg,
-    button[title*="sidebar"] svg,
-    svg[data-testid="stIconChevronDown"],
-    svg[data-testid="stIconChevronUp"],
-    svg[data-testid="stIconMaterial"] {
-        display: none !important;
+    /* ============ EXPANDER ============ */
+    [data-testid="stExpander"] {
+        background: rgba(45,30,20,0.6) !important;
+        border: 2px solid #5c4033 !important;
+        border-radius: 8px !important;
     }
     
-    /* Nascondi testo "keyboard_double_arrow" */
-    button span[data-baseweb] {
-        font-size: 0 !important;
-    }
-    
-    /* Nascondi testo tecnico negli expander */
-    [data-testid="stExpander"] details summary span {
-        font-size: inherit !important;
-    }
-    
-    [data-testid="stExpander"] details summary::marker {
-        content: "🗡️ " !important;
-    }
-    
-    /* Nascondi "double_arrow_right" e simili */
-    button[kind="header"]::after {
-        content: "" !important;
-    }
-    
-    button[kind="header"] span {
-        visibility: hidden !important;
-    }
-    
-    /* Nascondi label del radio button */
-    [data-testid="stRadio"] > label {
-        display: none !important;
-    }
-    
-    /* Nascondi testo "smart_" nelle chat */
-    [data-testid="stChatMessage"] span[data-testid*="smart"] {
-        display: none !important;
-    }
-    
-    /* Scrollbar */
+    /* ============ SCROLLBAR ============ */
     ::-webkit-scrollbar {
         width: 12px;
         background: #2c1810;
@@ -149,49 +129,82 @@ def load_css():
     ::-webkit-scrollbar-thumb {
         background: linear-gradient(180deg, #5c4033 0%, #3d2817 100%);
         border-radius: 6px;
+        border: 2px solid #2c1810;
     }
-    /* ============ FIX TESTI TECNICI SPECIFICI ============ */
     
-    /* Nascondi "keyboard_double_arrow" nel pulsante sidebar */
-    button[kind="header"] {
+    /* ============================================================
+       NASCONDI TESTI TECNICI - METODO AGGRESSIVO
+       ============================================================ */
+    
+    /* Nascondi TUTTO il testo nei pulsanti header/sidebar */
+    button[kind="header"],
+    button[kind="headerNoPadding"],
+    [data-testid="collapsedControl"] button {
         font-size: 0 !important;
-        width: 40px !important;
+        line-height: 0 !important;
+        overflow: hidden !important;
     }
     
-    button[kind="header"] svg {
-        font-size: 24px !important;
-    }
-    
-    /* Nascondi "double_arrow_right" sopra la chat */
-    [data-testid="stHeader"] button span {
-        display: none !important;
-    }
-    
-    /* Nascondi "smart_toy" nelle icone chat */
-    [data-testid="stChatMessage"] svg + span {
-        display: none !important;
-    }
-    
-    /* Nascondi TUTTI i testi Material Icons */
-    span[class*="material"] {
+    button[kind="header"] *:not(svg),
+    button[kind="headerNoPadding"] *:not(svg),
+    [data-testid="collapsedControl"] button *:not(svg) {
         font-size: 0 !important;
-    }
-    
-    span[class*="material"]::before,
-    span[class*="material"]::after {
-        font-size: 0 !important;
-    }
-    
-    /* Forza nascondere testo nei bottoni header */
-    [data-testid="collapsedControl"] span {
-        visibility: hidden !important;
+        display: inline !important;
         width: 0 !important;
         height: 0 !important;
+        overflow: hidden !important;
     }
     
-    /* Mantieni solo l'icona SVG visibile */
+    /* Mantieni solo SVG visibili */
+    button[kind="header"] svg,
+    button[kind="headerNoPadding"] svg,
     [data-testid="collapsedControl"] svg {
-        visibility: visible !important;
+        font-size: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+    }
+    
+    /* Nascondi icone Material e loro testo */
+    span[class*="material"],
+    span[data-testid*="stIcon"],
+    .material-icons,
+    .material-symbols-outlined {
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        display: none !important;
+    }
+    
+    /* Nascondi testo negli expander MA mantieni il titolo */
+    [data-testid="stExpander"] summary {
+        font-size: 16px !important;
+    }
+    
+    [data-testid="stExpander"] summary svg {
+        display: none !important;
+    }
+    
+    [data-testid="stExpander"] summary::before {
+        content: "📜 ";
+    }
+    
+    /* Nascondi label del radio */
+    [data-testid="stRadio"] > label {
+        display: none !important;
+    }
+    
+    /* Nascondi icone chat smart_toy */
+    [data-testid="stChatMessage"] svg {
+        display: none !important;
+    }
+    
+    /* Header app */
+    [data-testid="stHeader"] button span {
+        font-size: 0 !important;
+    }
+    
+    [data-testid="stHeader"] svg {
+        font-size: 24px !important;
     }
     </style>
     """
