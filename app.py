@@ -789,8 +789,8 @@ if prompt := st.chat_input(f"Cosa fa {pg['nome']}?"):
     with st.chat_message("assistant"):
         with st.spinner("Il DM pensa..."):
             try:
-response = client.models.generate_content(
-    model='gemini-flash-latest',
+                response = client.models.generate_content(
+                    model='gemini-flash-latest',
                     contents=conversazione
                 )
                 
@@ -810,7 +810,6 @@ response = client.models.generate_content(
                 st.error(f"Errore: {e}")
                 if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
                     st.warning("⏰ Quota API esaurita. Riprova tra qualche minuto!")
-
 # ============ OPZIONI E RESET ============
 with st.expander("⚙️ Opzioni"):
     col_opt1, col_opt2 = st.columns(2)
